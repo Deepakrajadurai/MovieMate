@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="ChatBubbleView">
+        <attr name="isSender" format="boolean" />
+    </declare-styleable>
+</resources>

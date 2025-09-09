@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">MovieMate</string>
+
+    <!-- Facebook Auth - IMPORTANT -->
+    <!-- Go to developers.facebook.com to get these values -->
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+    <string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
+
+    <!-- Activity Titles -->
+    <string name="chat_with_moviemate">Chat with MovieMate</string>
+
+    <!-- Login Screen (MainActivity) -->
+    <string name="welcome_to_moviemate">Welcome to MovieMate</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="app_logo">Application Logo</string>
+
+    <!-- Mood Input Screen -->
+    <string name="how_are_you_feeling">How are you feeling?</string>
+    <string name="select_a_mood_or_type_your_own">Select a mood to get started</string>
+    <string name="happy">😄 Happy</string>
+    <string name="thrilling">😱 Thrilling</string>
+    <string name="thought_provoking">🤔 Thought-Provoking</string>
+    <string name="sad">😢 Sad</string>
+    <string name="find_movies">Find Movies</string>
+
+    <!-- Movie Detail Screen -->
+    <string name="overview">Overview</string>
+
+    <!-- Chat Screen -->
+    <string name="type_a_message">Type a message…</string>
+    <string name="send_message">Send message</string>
+
+    <!-- Profile Screen -->
+    <string name="user_profile_picture">User profile picture</string>
+    <string name="log_out">Log Out</string>
+
+    <!-- Content Descriptions (for Accessibility) -->
+    <string name="movie_poster">Movie Poster</string>
+    <string name="profile">Profile</string>
+
+</resources>
