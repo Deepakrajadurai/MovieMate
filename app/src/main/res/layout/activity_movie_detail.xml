@@ -75,7 +75,6 @@
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:textAppearance="?attr/textAppearanceBody1"
-                app:drawableStartCompat="@drawable/ic_star_rate"
                 tools:text="8.5 / 10" />
 
             <TextView

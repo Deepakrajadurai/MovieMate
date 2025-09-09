@@ -1,7 +1,7 @@
 <!-- File: app/src/main/AndroidManifest.xml -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.moviemate">
+    package="com.projects.moviemates">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
