@@ -72,6 +72,8 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer-dash:${media3Version}")
     implementation("androidx.media3:media3-exoplayer-hls:${media3Version}")
 
+//    annotationProcessor("androidx.media3:media3-ui:${media3Version}")
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

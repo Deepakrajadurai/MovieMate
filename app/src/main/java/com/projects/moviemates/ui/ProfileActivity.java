@@ -1,21 +1,21 @@
-// File: app/src/main/java/com/example/moviemate/ui/ProfileActivity.java
+// File: app/src/main/java/com/projects/moviemates/ui/ProfileActivity.java
 package com.projects.moviemates.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+// CORRECTED: Import Picasso and the new CircleTransform class
 import com.projects.moviemates.R;
 import com.projects.moviemates.databinding.ActivityProfileBinding;
-import com.facebook.login.LoginManager;
+import com.projects.moviemates.utils.CircleTransform; // Import the new class
+//import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso; // Import Picasso
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -31,12 +31,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Configure Google Sign-in to get the client for sign-out
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         populateUserProfile();
 
@@ -49,25 +48,21 @@ public class ProfileActivity extends AppCompatActivity {
             binding.profileName.setText(user.getDisplayName());
             binding.profileEmail.setText(user.getEmail());
 
-            Glide.with(this)
+            // REPLACED GLIDE WITH PICASSO
+            Picasso.get()
                     .load(user.getPhotoUrl())
-                    .apply(RequestOptions.circleCropTransform())
+                    .transform(new CircleTransform()) // Apply the circular transformation
                     .placeholder(R.drawable.ic_profile_person) // Placeholder icon
+                    .error(R.drawable.ic_profile_person) // Error fallback icon
                     .into(binding.profileImage);
         }
     }
 
     private void signOut() {
-        // Firebase sign out
         mAuth.signOut();
-
-        // Google sign out
         mGoogleSignInClient.signOut();
+//        LoginManager.getInstance().logOut();
 
-        // Facebook sign out
-        LoginManager.getInstance().logOut();
-
-        // Navigate to Login screen and clear the back stack
         Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

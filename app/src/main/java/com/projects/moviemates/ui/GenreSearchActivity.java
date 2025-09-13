@@ -1,4 +1,4 @@
-// File: app/src/main/java/com/example/moviemate/ui/GenreSearchActivity.java
+// File: app/src/main/java/com/projects/moviemates/ui/GenreSearchActivity.java
 package com.projects.moviemates.ui;
 
 import android.Manifest;
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.projects.moviemates.databinding.ActivityGenreSearchBinding;
 import com.projects.moviemates.sensors.LocationHelper;
 import com.projects.moviemates.ui.adapters.MovieAdapter;
@@ -54,16 +55,47 @@ public class GenreSearchActivity extends AppCompatActivity {
 
     private void fetchMoviesBasedOnLocation() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        locationHelper.requestLocation(region -> {
-            binding.trendingTitle.setText("Trending in " + region);
-            movieViewModel.getPopularMovies(region).observe(this, movies -> {
-                binding.progressBar.setVisibility(View.GONE);
-                if (movies != null) {
-                    movieAdapter.setMovieList(movies);
-                } else {
-                    Toast.makeText(this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
-                }
-            });
+
+        locationHelper.requestLocation(new LocationHelper.LocationListener() {
+            // CORRECTED: The method name is onRegionDetermined, not onRegionFound, as per the error message.
+            @Override
+            public void onRegionDetermined(String region) {
+                runOnUiThread(() -> {
+                    binding.trendingTitle.setText("Trending in " + region);
+                    movieViewModel.getPopularMovies(region).observe(GenreSearchActivity.this, movies -> {
+                        binding.progressBar.setVisibility(View.GONE);
+                        if (movies != null) {
+                            movieAdapter.setMovieList(movies);
+                        } else {
+                            Toast.makeText(GenreSearchActivity.this, "Failed to fetch movies", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
+            }
+
+            // This is the second method that must be implemented.
+            // If this name is also wrong, the compiler will give a similar error, and you can correct it.
+            @Override
+            public void onLocationError(String error) {
+                runOnUiThread(() -> {
+                    binding.progressBar.setVisibility(View.GONE);
+                    fetchDefaultMovies("Could not get location: " + error);
+                });
+            }
+        });
+    }
+
+    private void fetchDefaultMovies(String toastMessage) {
+        Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show();
+        binding.trendingTitle.setText("Trending in US");
+        binding.progressBar.setVisibility(View.VISIBLE);
+        movieViewModel.getPopularMovies("US").observe(GenreSearchActivity.this, movies -> {
+            binding.progressBar.setVisibility(View.GONE);
+            if (movies != null) {
+                movieAdapter.setMovieList(movies);
+            } else {
+                Toast.makeText(this, "Failed to fetch default movies", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -74,9 +106,7 @@ public class GenreSearchActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 fetchMoviesBasedOnLocation();
             } else {
-                Toast.makeText(this, "Location permission denied. Showing default results.", Toast.LENGTH_LONG).show();
-                // Fetch with a default region like "US"
-                fetchMoviesBasedOnLocation();
+                fetchDefaultMovies("Location permission denied. Showing default results.");
             }
         }
     }

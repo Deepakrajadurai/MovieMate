@@ -1,7 +1,9 @@
+// File: app/src/main/java/com/projects/moviemates/model/Movie.java
 package com.projects.moviemates.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Movie implements Parcelable {
@@ -12,71 +14,98 @@ public class Movie implements Parcelable {
     @SerializedName("title")
     private String title;
 
-    @SerializedName("poster_path")
-    private String posterPath;
-
     @SerializedName("overview")
     private String overview;
 
-    // It's good practice to add other useful fields you might get from the API
-    @SerializedName("release_date")
-    private String releaseDate;
+    @SerializedName("poster_path")
+    private String posterPath;
+
+    // ✅ ADD THIS FIELD
+    @SerializedName("backdrop_path")
+    private String backdropPath;
 
     @SerializedName("vote_average")
     private double voteAverage;
 
-    // --- Getters ---
-    // These are needed for other classes (like your adapter) to access the movie's data.
+    // You might have other fields like release_date, etc.
+
+    // Constructor, Getters, and Setters
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getOverview() {
         return overview;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+    // ✅ ADD THIS GETTER (This is the method the error is about)
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    // ✅ ADD THIS SETTER (Good practice)
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
     public double getVoteAverage() {
         return voteAverage;
     }
 
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
 
     // --- Parcelable Implementation ---
-    // This logic allows the object to be passed in an Intent.
+
+    protected Movie(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        overview = in.readString();
+        posterPath = in.readString();
+        backdropPath = in.readString(); // ✅ READ THE NEW FIELD FROM THE PARCEL
+        voteAverage = in.readDouble();
+    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        // Write the object's data to the parcel.
-        // The order you write here MUST match the order you read in the constructor below.
         dest.writeInt(id);
         dest.writeString(title);
-        dest.writeString(posterPath);
         dest.writeString(overview);
-        dest.writeString(releaseDate);
+        dest.writeString(posterPath);
+        dest.writeString(backdropPath); // ✅ WRITE THE NEW FIELD TO THE PARCEL
         dest.writeDouble(voteAverage);
     }
 
-    protected Movie(Parcel in) {
-        // Read the data from the parcel back into the object's fields.
-        // The read order MUST match the write order from writeToParcel().
-        id = in.readInt();
-        title = in.readString();
-        posterPath = in.readString();
-        overview = in.readString();
-        releaseDate = in.readString();
-        voteAverage = in.readDouble();
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -90,9 +119,4 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 }
