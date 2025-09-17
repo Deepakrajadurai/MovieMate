@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 // CORRECTED: Import Picasso and the new CircleTransform class
+import com.projects.moviemates.MainActivity;
 import com.projects.moviemates.R;
 import com.projects.moviemates.databinding.ActivityProfileBinding;
 import com.projects.moviemates.utils.CircleTransform; // Import the new class

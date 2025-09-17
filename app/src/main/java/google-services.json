@@ -9,26 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:563816755621:android:5bd8035e00684c4633784c",
         "android_client_info": {
-          "package_name": "com.example.moviemate"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDJcNZzG1Uzbs284Wqa0mDDN_RwBNh1CwY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:563816755621:android:1a3121fc91c4406833784c",
-        "android_client_info": {
-          "package_name": "com.projects.movimates"
+          "package_name": "com.projects.moviemates"
         }
       },
       "oauth_client": [],
