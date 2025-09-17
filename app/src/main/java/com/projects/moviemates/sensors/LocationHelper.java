@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 public class LocationHelper {
 
     private static final String TAG = "LocationHelper";
-    private static final String DEFAULT_REGION = "US"; // Define a constant for the default region
+    public static final String DEFAULT_REGION = "US"; // Define a constant for the default region
 
     // CHANGED: The listener now includes an error callback for better communication.
     public interface LocationListener {

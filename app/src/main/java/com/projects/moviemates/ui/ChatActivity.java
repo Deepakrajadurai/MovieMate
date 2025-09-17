@@ -9,6 +9,9 @@ import com.projects.moviemates.model.ChatMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import com.projects.moviemates.R;
 
 public class ChatActivity extends ViewModel {
 

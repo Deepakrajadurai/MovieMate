@@ -40,5 +40,24 @@
     <!-- Content Descriptions (for Accessibility) -->
     <string name="movie_poster">Movie Poster</string>
     <string name="profile">Profile</string>
+    <!-- ... other strings ... -->
+    <string name="chatbot">Chatbot</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_camera_scan">Scan Poster</string>
+    <string name="title_activity_mood_input">Mood Input</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_genre_search">Genre Search</string>
+    <string name="title_activity_movie_detail">Movie Details</string>
+    <string name="title_activity_profile">Profile</string>
+
+    <string name="genre_search">Genre Search</string>
+    <string name="mood_input">Mood Input</string>
+    <string name="account">Account</string>
+    <string name="logout">Logout</string>
+    <string name="home">Home</string>
+    <string name="scan_poster">Scan Poster</string> <!-- Add this line -->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_genre_search"
+            android:icon="@drawable/ic_movie_filter"
+            android:title="Genre Search" />
+
+        <item
+            android:id="@+id/nav_mood_input"
+            android:icon="@drawable/ic_mood"
+            android:title="Mood Input" />
+
+        <!-- Add more items as needed -->
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="Profile" />
+    </group>
+
+    <!--
+      This item acts as a section header. The nested <menu> creates a submenu
+      or a grouped section depending on the parent view (e.g., NavigationView).
+    -->
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

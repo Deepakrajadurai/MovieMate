@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" /> <!-- Set required="true" if camera is essential -->
 
     <application
         android:allowBackup="true"
@@ -16,13 +18,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieMate"
+        android:theme="@style/Theme.MovieMates"
         tools:targetApi="31">
 
-        <!-- Login Activity (Launcher) -->
+
+        <!--
+            AuthActivity (Formerly MainActivity)
+            This will be the launcher if the user is not logged in.
+            Or, your app might always launch MainActivity, and MainActivity decides
+            whether to show login UI or navigate to HomeActivity.
+        -->
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,27 +40,70 @@
         </activity>
 
         <!-- Other Activities -->
-        <activity android:name=".ui.MoodInputActivity" />
-        <activity android:name=".ui.ChatActivity" />
-        <activity android:name=".ui.GenreSearchActivity" />
-        <activity android:name=".ui.MovieDetailActivity" android:theme="@style/Theme.MovieMate.NoActionBar"/>
-        <activity android:name=".ui.ProfileActivity" />
+        <activity
+            android:name=".sensors.CameraScanActivity"
+            android:exported="false"
+            android:label="@string/title_activity_camera_scan"/>
+        <activity
+            android:name=".ui.MoodInputActivity"
+            android:exported="false"
+            android:label="@string/title_activity_mood_input"/>
+        <activity
+            android:name=".ui.ChatActivity"
+            android:exported="false"
+            android:label="@string/title_activity_chat"/>
+        <activity
+            android:name=".ui.GenreSearchActivity"
+            android:exported="false"
+            android:label="@string/title_activity_genre_search"/>
+        <activity
+            android:name=".ui.MovieDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_movie_detail"
+            android:theme="@style/Theme.MovieMate.NoActionBar" />
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:exported="false"
+            android:label="@string/title_activity_profile"/>
 
-        <!-- Facebook SDK Configuration -->
-<!--        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>-->
-<!--        <activity android:name="com.facebook.FacebookActivity"-->
-<!--            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
-<!--            android:label="@string/app_name" />-->
-<!--        <activity-->
-<!--            android:name="com.facebook.CustomTabActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--                <data android:scheme="@string/fb_login_protocol_scheme" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+
+        <!--
+           Fragment tags are generally not needed here if you are using
+           Jetpack Navigation Component. Fragments are defined in your navigation graphs.
+           The tools:layout attributes are useful for the layout editor when designing
+           layouts that will host these fragments.
+
+           If you had a specific reason to declare a fragment globally (e.g. for use
+           with FragmentManager directly without Navigation Component in some specific scenario),
+           you could, but it's less common for UI fragments in a NavComponent setup.
+        -->
+
+        <!--
+            The <navigation> tags and <activity android:id="..."> within them
+            are meant to be used *inside* a navigation graph XML file (e.g., res/navigation/nav_graph.xml)
+            to define destinations, not directly in the AndroidManifest.xml for component declaration.
+        -->
+
+
+        <!-- Facebook SDK Configuration (If you decide to use it) -->
+        <!--
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        -->
 
     </application>
 </manifest>

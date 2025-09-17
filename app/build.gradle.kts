@@ -28,6 +28,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        viewBinding = true
         // viewBinding true // You can have both ViewBinding and DataBinding enabled
     }
     compileOptions {
@@ -54,6 +55,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.android.gms:play-services-auth:20.5.0")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 
     // Retrofit for network calls
     val retrofitVersion = "2.9.0"
@@ -71,6 +74,22 @@ dependencies {
     implementation("androidx.media3:media3-ui:${media3Version}")
     implementation("androidx.media3:media3-exoplayer-dash:${media3Version}")
     implementation("androidx.media3:media3-exoplayer-hls:${media3Version}")
+
+    val camerax_version = "1.3.0" // Check for the latest version
+    implementation("androidx.camera:camera-core:${camerax_version}")
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation("androidx.camera:camera-view:${camerax_version}")
+    implementation("androidx.camera:camera-extensions:${camerax_version}") // Optional for extensions
+// Optional for extensions
+
+// ML Kit Text Recognition
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
+// For TMDB API (Retrofit example)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+// For LLMs (if using Google's Generative AI SDK - Gemini)
+// implementation("com.google.ai.client.generativeai:generativeai:0.1.0") // Check for latest
 
 //    annotationProcessor("androidx.media3:media3-ui:${media3Version}")
 

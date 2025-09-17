@@ -10,6 +10,10 @@
     <!-- Standard Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="my_dark_primary">#1F1F1F</color> <!-- Example: A dark grey -->
+    <color name="my_dark_primary_variant">#0A0A0A</color> <!-- Example: A very dark grey/near black -->
+    <color name="my_dark_secondary">#303F9F</color> <!-- Example: A dark indigo -->
+    <color name="my_dark_secondary_variant">#1A237E</color> <!-- Example: A very dark indigo -->
 
     <!-- Custom App Colors -->
     <color name="background_light">#FFF5F5F5</color>

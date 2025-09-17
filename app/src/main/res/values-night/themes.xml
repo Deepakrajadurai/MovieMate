@@ -1,7 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MovieMates" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Base application theme overrides for Night mode. -->
+    <!-- It will inherit from the parent defined in values/themes.xml's Theme.MovieMate,
+         which should be Theme.Material3.DayNight.NoActionBar. -->
+    <style name="Theme.MovieMates" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- These will override the values set in values/themes.xml for Theme.MovieMate -->
+        <item name="colorPrimary">@color/my_dark_primary</item> <!-- Example: Define my_dark_primary in your colors.xml -->
+        <item name="colorPrimaryVariant">@color/my_dark_primary_variant</item>
+        <item name="colorOnPrimary">@color/black</item> <!-- Or another suitable color for text on dark primary -->
+
+        <item name="colorSecondary">@color/my_dark_secondary</item>
+        <item name="colorSecondaryVariant">@color/my_dark_secondary_variant</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- You might want a different status bar color for night mode -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Ensure other necessary overrides for dark theme appearance -->
     </style>
+
+    <!-- If you had a Theme.MovieMate.WithActionBar, define its night version too if needed -->
+    <!--
+    <style name="Theme.MovieMate.WithActionBar">
+        <item name="colorPrimary">@color/my_dark_primary</item>
+        ...
+    </style>
+    -->
 </resources>

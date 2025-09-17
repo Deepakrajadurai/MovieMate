@@ -1,0 +1,47 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/homeContentFragment">
+
+    <fragment
+        android:id="@+id/homeContentFragment"
+        android:name="com.projects.moviemates.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <!-- Action to navigate to GenreSearchFragment -->
+        <action
+            android:id="@+id/action_homeContentFragment_to_genreSearchFragment"
+            app:destination="@id/genreSearchFragment" />
+
+        <!-- Action to navigate to MoodInputFragment -->
+        <action
+            android:id="@+id/action_homeContentFragment_to_moodInputFragment"
+            app:destination="@id/moodInputFragment" />
+
+        <!-- Action to navigate to ProfileFragment -->
+        <action
+            android:id="@+id/action_homeContentFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/genreSearchFragment"
+        android:name="com.projects.moviemates.ui.GenreSearchFragment"
+        android:label="Genre Search"
+        tools:layout="@layout/fragment_genre_search" />
+
+    <fragment
+        android:id="@+id/moodInputFragment"
+        android:name="com.projects.moviemates.ui.MoodInputFragment"
+        android:label="Mood Input"
+        tools:layout="@layout/fragment_mood_input" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.projects.moviemates.ui.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" /> <!-- Create this fragment and layout -->
+
+</navigation>
