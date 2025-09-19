@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-// View, ImageView, TextView are fine if used, e.g., in updateNavHeader (which is commented out)
-// import android.view.View;
-// import android.widget.ImageView;
-// import android.widget.TextView;
+import android.view.View; // Added for updateNavHeader example
+import android.widget.ImageView; // Added for updateNavHeader example
+import android.widget.TextView; // Added for updateNavHeader example
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment; // IMPORTANT: Added this import
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // CRITICAL LINE for using your Toolbar:
         // This assumes your Toolbar in XML has android:id="@+id/top_app_bar"
-        //setSupportActionBar(binding.topAppBar);
+        setSupportActionBar(binding.topAppBar);
 
         // Drawer and Navigation setup - this looks correct
         drawerLayout = binding.drawerLayout;
@@ -61,9 +61,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setOpenableLayout(drawerLayout) // Use setOpenableLayout for DrawerLayout
                 .build();
 
-        // Ensure R.id.nav_host_fragment_content_home is the ID of your NavHostFragment
-        // in activity_main.xml
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        // --- START OF FIX ---
+        // Get the NavHostFragment first from the FragmentManager
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+
+        // Check if the NavHostFragment was found
+        if (navHostFragment != null) {
+            // Get the NavController from the NavHostFragment
+            navController = navHostFragment.getNavController();
+        } else {
+            // This case indicates a serious problem with your layout or fragment setup.
+            // Log an error, show a toast, or handle gracefully.
+            Toast.makeText(this, "Error: NavHostFragment not found!", Toast.LENGTH_LONG).show();
+            // You might want to finish the activity if navigation is critical
+            finish();
+            return; // Prevent NullPointerException if navController remains null
+        }
+        // --- END OF FIX ---
+
+        // Original problematic line (now commented out):
+        // navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
         // Setup ActionBar with NavController
         // This makes the Toolbar aware of navigation changes (e.g., updating title, showing Up button)
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -219,4 +238,3 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // (The one you had is fine if logout/profile are special)
     }
 }
-
